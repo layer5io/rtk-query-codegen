@@ -24,7 +24,7 @@ rtk-query-codegen -i /path/to/schema.yml -o /path/to/generated-api.js -c /path/t
 
 ### Simple usage
 
-```json
+```
  {
   apiFile: string
   schemaFile: string
@@ -51,7 +51,7 @@ rtk-query-codegen -i /path/to/schema.yml -o /path/to/generated-api.js -c /path/t
 
 If you only want to include a few endpoints, you can use the `filterEndpoints` config option to filter your endpoints.
 
-```json
+```
  {
   // ...
   // should only have endpoints loginUser, placeOrder, getOrderById, deleteOrder
@@ -63,7 +63,7 @@ If you only want to include a few endpoints, you can use the `filterEndpoints` c
 
 If an endpoint is generated as a mutation instead of a query or the other way round, you can override that.
 
-```json
+```
 {
   // ...
   "endpointOverrides": [
@@ -81,7 +81,7 @@ Setting `hooks: true` will generate `useQuery` and `useMutation` hook exports. I
 
 ### Multiple output files
 
-```json
+```
 
   schemaFile: 'https://petstore3.swagger.io/api/v3/openapi.json',
   apiFile: './src/store/emptyApi.ts',
