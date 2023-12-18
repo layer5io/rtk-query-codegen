@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": false,
     "strict": false,
-    "noImplicitAny": false, // Disable implicit 'any' types
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "module": "ESNext",
     "declaration": false,
