@@ -1,6 +1,6 @@
 # OpenAPI API Client Generation and Compilation
 
-Generate an API client from an OpenAPI schema in YAML format and create a rtk-query api client. Thes package streamlines this process and ensures a smooth workflow.
+Generate an API client from an OpenAPI schema in YAML format and create a rtk-query api client. This package streamlines this process and ensures a smooth workflow.
 
 ## Dependencies
 
