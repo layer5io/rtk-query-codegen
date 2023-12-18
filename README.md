@@ -1,5 +1,120 @@
-# layer5-repo-template
-This repository is used as the boilerplate for consistency across all Layer5 repos.
+# OpenAPI API Client Generation and Compilation
+
+Generate an API client from an OpenAPI schema in YAML format and create a rtk-query api client. Thes package streamlines this process and ensures a smooth workflow.
+
+## Dependencies
+
+1. **Node.js and npm:** Ensure you have Node.js and npm installed on your system. You can download them from [nodejs.org](https://nodejs.org/).
+
+## Installation
+
+```bash
+  npm install @layer5/rtk-query-codegen
+```
+
+## Usage
+
+Run the script using the following command:
+
+```bash
+rtk-query-codegen -i /path/to/schema.yml -o /path/to/generated-api.js -c /path/to/codegen-config.json
+```
+
+## Config File Options
+
+### Simple usage
+
+```json
+ {
+  apiFile: string
+  schemaFile: string
+  apiImport?: string
+  exportName?: string
+  argSuffix?: string
+  responseSuffix?: string
+  hooks?:
+    | boolean
+    | { queries: boolean; lazyQueries: boolean; mutations: boolean }
+  tag?: boolean
+  outputFile: string
+  filterEndpoints?:
+    | string
+    | RegExp
+    | EndpointMatcherFunction
+    | Array<string | RegExp | EndpointMatcherFunction>
+  endpointOverrides?: EndpointOverrides[]
+  flattenArg?: boolean
+}
+```
+
+### Filtering endpoints
+
+If you only want to include a few endpoints, you can use the `filterEndpoints` config option to filter your endpoints.
+
+```json
+ {
+  // ...
+  // should only have endpoints loginUser, placeOrder, getOrderById, deleteOrder
+  filterEndpoints: ['loginUser', /Order/],
+}
+```
+
+### Endpoint overrides
+
+If an endpoint is generated as a mutation instead of a query or the other way round, you can override that.
+
+```json
+{
+  // ...
+  "endpointOverrides": [
+    {
+      "pattern": "loginUser",
+      "type": "mutation"
+    }
+  ]
+}
+```
+
+### Generating hooks
+
+Setting `hooks: true` will generate `useQuery` and `useMutation` hook exports. If you also want `useLazyQuery` hooks generated or more granular control, you can also pass an object in the shape of: `{ queries: boolean; lazyQueries: boolean; mutations: boolean }`.
+
+### Multiple output files
+
+```json
+
+  schemaFile: 'https://petstore3.swagger.io/api/v3/openapi.json',
+  apiFile: './src/store/emptyApi.ts',
+  outputFiles: {
+    './src/store/user.ts': {
+      filterEndpoints: [/user/i],
+    },
+    './src/store/order.ts': {
+      filterEndpoints: [/order/i],
+    },
+    './src/store/pet.ts': {
+      filterEndpoints: [/pet/i],
+    },
+  },
+}
+```
+
+## The Api.js file
+
+The api.js file contains the generated api endpoints , it injects them into the base rtk client . And then exports all the hooks to use them .
+If we need to override an api endpoint we can injectEnpoints in a separate file .
+
+## Troubleshooting
+
+- If any of the steps fail, the script will exit with a non-zero status code, indicating a failure. Review the error messages to diagnose and resolve any issues.
+
+- Ensure that the Bash script is executable by running `chmod +x generate-api.sh`.
+
+## Important Notes
+
+- Make sure the OpenAPI schema (`schema.yml`) is updated with latest changes and doesnt contain any breaking changes .
+
+- Always validate and test the generated API client to ensure it functions as expected.
 
 <div>&nbsp;</div>
 
@@ -17,6 +132,7 @@ Become a <b>Meshtee</b> today!</p>
 
 Find out more on the <a href="https://layer5.io/community">Layer5 community</a>. <br />
 <br /><br /><br /><br />
+
 </p>
 
 <div>&nbsp;</div>
@@ -29,7 +145,6 @@ Find out more on the <a href="https://layer5.io/community">Layer5 community</a>.
   <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src=".github/readme/images//slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
 </picture>
 </a>
-
 
 <a href="https://meshery.io/community"><img alt="Layer5 Community" src=".github/readme/images//community.svg" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
 
