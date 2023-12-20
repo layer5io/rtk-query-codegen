@@ -1,11 +1,9 @@
 #! /usr/bin/env node
 var { program } = require("commander");
 var { exec } = require("child_process");
-var { renameSync, rmdirSync, unlinkSync } = require("fs");
-var { dirname, basename, join } = require("path");
+var { unlinkSync } = require("fs");
 var fs = require("fs");
 var ts = require("typescript");
-var compileConfig = require("./apiCompilerConfig.json");
 
 program
     .option("-i, --input <input>", "Input YAML schema file path")
@@ -19,7 +17,20 @@ program
 const compileApi = (tsPath, outputPath) => {
     // read ts file
     const tsFile = fs.readFileSync(tsPath, "utf8");
-    const result = ts.transpile(tsFile, compileConfig);
+    const result = ts.transpile(tsFile, {
+        target: "ESNext",
+        esModuleInterop: true,
+        forceConsistentCasingInFileNames: false,
+        strict: false,
+        noImplicitAny: false,
+        skipLibCheck: true,
+        module: "ESNext",
+        declaration: false,
+        sourceMap: false,
+        moduleResolution: "node",
+        allowSyntheticDefaultImports: true,
+        emitDeclarationOnly: false,
+    });
     console.log("Writing output to " + outputPath);
     fs.writeFileSync(outputPath, result);
 };
