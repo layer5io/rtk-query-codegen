@@ -1,6 +1,7 @@
 {
   "name": "@layer5/rtk-query-codegen",
   "version": "0.0.1",
+  "private": false,
   "description": "Codegen to create rtk-query api from openapi schema",
   "main": "index.js",
   "scripts": {
