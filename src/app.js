@@ -20,9 +20,8 @@ const compileApi = (tsPath, outputPath) => {
     // read ts file
     const tsFile = fs.readFileSync(tsPath, "utf8");
     const result = ts.transpile(tsFile, compileConfig);
-    // write the result to output file
+    console.log("Writing output to " + outputPath);
     fs.writeFileSync(outputPath, result);
-    console.log("wrote output to " + outputPath);
 };
 
 // Function to run a command and handle success or failure

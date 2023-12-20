@@ -21,7 +21,6 @@ jobs:
           node-version: 16
       - run: |
           npm install
-          npm run dist
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
