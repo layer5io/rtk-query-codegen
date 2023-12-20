@@ -3,7 +3,9 @@
     "version": "0.0.1",
     "private": false,
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "registry": "https://registry.npmjs.org",
+        "scope": "@layer5"
     },
     "description": "Codegen to create rtk-query api from openapi schema",
     "main": "index.js",
