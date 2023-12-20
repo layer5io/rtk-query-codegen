@@ -34,7 +34,6 @@ jobs:
           node-version: 16
           registry-url: "https://registry.npmjs.org"
           scope: "@layer5"
-          access: "public"
       - run: npm publish --verbose
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
