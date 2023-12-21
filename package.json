@@ -8,7 +8,8 @@
     "description": "Codegen to create rtk-query api from openapi schema",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "release": "node ./release.js"
     },
     "bin": {
         "rtk-query-codegen": "./src/app.js"
